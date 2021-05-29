@@ -1,0 +1,53 @@
+{% extends "master.html" %}
+{% block title %} Personality Quiz {% endblock %}
+
+{% block body %}
+<form action="{{ url_for('index') }}" method=post>
+
+  <div class="w3-container w3-center">
+    <h1>What Is Your CS:GO Color?</h1>
+  </div>
+
+  <div class="w3-container w3-center">
+    <p>Name:</p>
+    <input class="w3-input w3-border" type="text" name="name">
+  </div>
+
+    <div class="w3-container w3-center">
+    <p>Which maps do you select?</p>
+    {% for map in maps %}
+      <input type="checkbox" name="map" id="{{ map.name }}" value="{{ map.value }}" class="input-hidden">
+        <label for="{{ map.name }}"><img src="{{ map.image }}" alt="{{ map.name }}"/></label>
+    {% endfor %}
+  </div>
+
+  <div class="w3-container w3-center">
+    <p>What's your favorite utility?</p>
+    {% for utility in utilities %}
+      <input type="radio" name="utility" id="{{ utility.name }}" value="{{ utility.value }}" class="input-hidden">
+        <label for="{{ utility.name }}"><img src="{{ utility.image }}" alt="{{ utility.name }}"/></label>
+    {% endfor %}
+  </div>
+
+  <div class="w3-container w3-center">
+    <p>What's your favorite weapon to use on eco rounds?</p>
+    {% for eco in ecos %}
+      <input type="radio" name="eco" id="{{ eco.name }}" value="{{ eco.value }}" class="input-hidden">
+        <label for="{{ eco.name }}"><img src="{{ eco.image }}" alt="{{ eco.name }}"/></label>
+    {% endfor %}
+  </div>
+
+  <div class="w3-container w3-center">
+    <p>What's your favorite weapon to use on buy rounds?</p>
+    {% for buy in buys %}
+      <input type="radio" name="buy" id="{{ buy.name }}" value="{{ buy.value }}" class="input-hidden">
+        <label for="{{ buy.name }}"><img src="{{ buy.image }}" alt="{{ buy.name }}"/></label>
+    {% endfor %}
+  </div>
+
+  <div class="w3-container w3-center">
+    <br><br><button class="w3-button w3-white" type="submit">Submit</button><br><br>
+  </div>
+
+</form>
+{% endblock %}
