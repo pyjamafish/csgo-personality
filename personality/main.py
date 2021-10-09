@@ -41,14 +41,14 @@ buys = [
 ]
 
 
-def calculate_color(sum: int) -> str:
-    if sum <= 4:
+def calculate_color(quiz_sum: int) -> str:
+    if quiz_sum <= 4:
         result = "Orange"
-    elif sum <= 8:
+    elif quiz_sum <= 8:
         result = "Green"
-    elif sum <= 16:
+    elif quiz_sum <= 16:
         result = "Blue"
-    elif sum <= 20:
+    elif quiz_sum <= 20:
         result = "Yellow"
     else:
         result = "Purple"
@@ -59,17 +59,18 @@ def calculate_color(sum: int) -> str:
 def index():
     if request.method == "POST":
         name = request.form.get("name")
-        sum = 0
-        sum += len(request.form.getlist("map"))
-        sum += int(request.form.get("utility"))
-        sum += int(request.form.get("eco"))
-        sum += int(request.form.get("buy"))
 
-        result = calculate_color(sum)
+        quiz_sum = sum([
+            len(request.form.getlist("map")),
+            int(request.form.get("utility")),
+            int(request.form.get("eco")),
+            int(request.form.get("buy")),
+        ])
+        result = calculate_color(quiz_sum)
 
         with open("data.csv", "a") as f:
             writer = csv.writer(f)
-            writer.writerow([name, sum, result])
+            writer.writerow([name, quiz_sum, result])
 
         return render_template(
             "result.html",
