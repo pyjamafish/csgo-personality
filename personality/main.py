@@ -61,7 +61,7 @@ def index():
         name = request.form.get("name")
 
         quiz_sum = sum([
-            len(request.form.getlist("map")),
+            sum(int(s) for s in request.form.getlist("map")),
             int(request.form.get("utility")),
             int(request.form.get("eco")),
             int(request.form.get("buy")),
